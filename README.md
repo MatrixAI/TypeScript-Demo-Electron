@@ -10,6 +10,42 @@ Otherwise fakeroot fails.
 
 Need to integrate webpack into electron here as well.
 
+Needed `@electron-forge/plugin-webpack`.
+
+```
+npm install --save-dev @electron-forge/plugin-webpack
+```
+
+This gives us a typescript-webpack template. I need to inspect the template to compare what we are trying to do.
+
+```
+mkdir -p tmp/webpacky
+cd tmp/webpacky
+electron-forge init --template=typescript-webpack
+```
+
+This creates several webpack files:
+
+```
+webpack.main.config.js
+webpack.plugins.js
+webpack.renderer.config.js
+webpack.rules.js
+```
+
+The main is the `electronMain`, this compiles the node-side or "main" of electron.
+
+The `webpack.renderer.config.js` is the frontend side. This is similar to the SPA application. With style loader and stuff. It has a rules.
+
+A common set of rules is `webpack.rules`.
+
+The rules are things that test for stuff and use certain loaders.
+
+What is `fork-ts-checker-webpack-plugin`.
+
+
+
+
 ---
 
 ## Installation

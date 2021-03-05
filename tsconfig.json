@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "sourceMap": false,
-    "declaration": true,
+    "sourceMap": true,
+    "declaration": false,
     "allowJs": true,
     "strictNullChecks": true,
     "noImplicitAny": false,

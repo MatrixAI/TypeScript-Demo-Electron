@@ -28,6 +28,9 @@ let
   ).nodeDependencies;
   drv = devPackage.overrideAttrs (attrs: {
     src = src;
+    buildInputs = attrs.buildInputs ++ [
+      nodePackages.rimraf # needed to compile lzma-native which is used by @electron-forge/cli
+    ];
     dontNpmInstall = true;
     postInstall = ''
       # The dependencies were prepared in the install phase
