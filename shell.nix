@@ -5,7 +5,6 @@ pkgs.mkShell {
   nativeBuildInputs = [
     nodejs
     nodePackages.node2nix
-
     dpkg
     fakeroot
     rpm
@@ -13,7 +12,7 @@ pkgs.mkShell {
     mono
   ];
   shellHook = ''
-    echo 'Entering Typescript-Demo-Lib'
+    echo 'Entering Typescript-Demo-Electron'
     set -o allexport
     . ./.env
     set +o allexport
@@ -25,7 +24,7 @@ pkgs.mkShell {
 
     # needed to use fakeroot
     # otherwise the electron-forge complains
-    umask 022
+    # umask 022
 
     set +v
   '';

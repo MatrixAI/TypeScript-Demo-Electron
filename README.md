@@ -2,6 +2,16 @@
 
 [![pipeline status](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Electron/badges/master/pipeline.svg)](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Electron/commits/master)
 
+---
+
+Need to use umask 022. Not umask 027.
+
+Otherwise fakeroot fails.
+
+Need to integrate webpack into electron here as well.
+
+---
+
 ## Installation
 
 Note that JavaScript libraries are not packaged in Nix. Only JavaScript applications are.
