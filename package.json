@@ -22,10 +22,15 @@
     "typescript-demo-lib": "ts-node -r tsconfig-paths/register src/bin/typescript-demo-lib.ts"
   },
   "dependencies": {
-    "uuid": "^8.3.0"
+    "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron": "12.0.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^13.13.1",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
@@ -38,7 +43,6 @@
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
-    "typedoc": "^0.20.16",
     "typescript": "^4.1.3"
   }
 }
