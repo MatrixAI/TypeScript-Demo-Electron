@@ -1,6 +1,6 @@
-# TypeScript-Demo-Lib
+# TypeScript-Demo-Electron
 
-[![pipeline status](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Lib/badges/master/pipeline.svg)](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Lib/commits/master)
+[![pipeline status](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Electron/badges/master/pipeline.svg)](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Electron/commits/master)
 
 ## Installation
 
@@ -50,16 +50,6 @@ npm run lint
 npm run lintfix
 ```
 
-### Calling Executables
-
-When calling executables in development, use this style:
-
-```
-npm run typescript-demo-lib -- p1 p2 p3
-```
-
-The `--` is necessary to make `npm` understand that the parameters are for your own executable, and not parameters to `npm`.
-
 ### Using the REPL
 
 ```
@@ -74,36 +64,3 @@ $ npm run ts-node
 You can also create test files in `./src`, and run them with `npm run ts-node ./src/test.ts`.
 
 This allows you to test individual pieces of typescript code and it makes it easier when doing large scale rearchitecting of TypeScript code.
-
-### Path Aliases
-
-Due to https://github.com/microsoft/TypeScript/issues/10866, you cannot use path aliases without a bundler like Webpack to further transform the generated JavaScript code in order to resolve the path aliases. Because this is a simple library demonstration, there's no need to use a bundler. In fact, for such libraries, it is far more efficient to not bundle the code.
-
-However we have left the path alias configuration in `tsconfig.json`, `jest.config.js` and in the tests we are making use of the `@` alias.
-
-### Docs Generation
-
-Remember to create `gh-pages` as an orphan branch first: `git checkout --orphan gh-pages`.
-
-```sh
-typedoc --out /tmp/docs src
-git checkout gh-pages
-find . -mindepth 1 -maxdepth 1 ! -name ".git" -exec rm -r "{}" \;
-mv /tmp/docs/* .;
-touch .nojekyll
-git commit -am "Updated Docs";
-git push
-```
-
-See the docs at: https://matrixai.github.io/TypeScript-Demo-Lib/
-
-### Publishing
-
-```sh
-# npm login
-npm version patch # major/minor/patch
-npm run build
-npm publish --access public
-git push
-git push --tags
-```
