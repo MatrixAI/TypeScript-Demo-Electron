@@ -1,0 +1,44 @@
+{
+  "name": "@matrixai/typescript-demo-lib",
+  "version": "1.0.0",
+  "bin": {
+    "typescript-demo-lib": "dist/bin/typescript-demo-lib.js"
+  },
+  "author": "Roger Qiu",
+  "description": "TypeScript Demo Library Project",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatrixAI/TypeScript-Demo-Lib.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "ts-node": "ts-node -r tsconfig-paths/register",
+    "test": "jest",
+    "lint": "eslint '{src,tests}/**/*.{js,ts}'",
+    "lintfix": "eslint '{src,tests}/**/*.{js,ts}' --fix",
+    "typescript-demo-lib": "ts-node -r tsconfig-paths/register src/bin/typescript-demo-lib.ts"
+  },
+  "dependencies": {
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^13.13.1",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "typedoc": "^0.20.16",
+    "typescript": "^4.1.3"
+  }
+}
