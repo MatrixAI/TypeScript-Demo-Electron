@@ -29,7 +29,9 @@ let
   drv = devPackage.overrideAttrs (attrs: {
     src = src;
     buildInputs = attrs.buildInputs ++ [
-      nodePackages.rimraf # needed to compile lzma-native which is used by @electron-forge/cli
+      # needed to compile lzma-native which is used by @electron-forge/cli
+      nodePackages.node-pre-gyp
+      nodePackages.rimraf
     ];
     dontNpmInstall = true;
     postInstall = ''

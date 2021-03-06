@@ -5,6 +5,8 @@ pkgs.mkShell {
   nativeBuildInputs = [
     nodejs
     nodePackages.node2nix
+    electron
+    nodePackages."@electron-forge/cli"
     dpkg
     fakeroot
     rpm
