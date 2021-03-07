@@ -20,7 +20,7 @@ pkgs.mkShell {
     set +o allexport
     set -v
 
-    export PATH="$(pwd)/dist/bin:$(npm bin):$PATH"
+    export PATH="$PATH:$(pwd)/dist/bin:$(npm bin)"
     npm install
     mkdir --parents "$(pwd)/tmp"
 
