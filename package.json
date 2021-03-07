@@ -16,6 +16,7 @@
     "type": "git",
     "url": "https://github.com/MatrixAI/TypeScript-Demo-Electron.git"
   },
+  "main": "./dist/main.js",
   "scripts": {
     "server": "webpack serve --mode='development'",
     "watch": "webpack --watch --mode='development'",
