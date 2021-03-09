@@ -3,59 +3,36 @@
 [![pipeline status](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Electron/badges/master/pipeline.svg)](https://gitlab.com/MatrixAI/open-source/TypeScript-Demo-Electron/commits/master)
 
 ---
-
+**Notice!**
 Need to use umask 022. Not umask 027.
 
 Otherwise fakeroot fails.
 
-Need to integrate webpack into electron here as well.
-
-Needed `@electron-forge/plugin-webpack`.
-
-```
-npm install --save-dev @electron-forge/plugin-webpack
-```
-
-This gives us a typescript-webpack template. I need to inspect the template to compare what we are trying to do.
-
-```
-mkdir -p tmp/webpacky
-cd tmp/webpacky
-electron-forge init --template=typescript-webpack
-```
-
-This creates several webpack files:
-
-```
-webpack.main.config.js
-webpack.plugins.js
-webpack.renderer.config.js
-webpack.rules.js
-```
+---
+**Webpack Configuration**
 
 The main is the `electronMain`, this compiles the node-side or "main" of electron.
 
-The `webpack.renderer.config.js` is the frontend side. This is similar to the SPA application. With style loader and stuff. It has a rules.
+The `electronRenderer` is the frontend side. This is similar to the SPA application. With style loader and stuff.
 
-A common set of rules is `webpack.rules`.
+---
+**Electron Forge Configuration**
 
-The rules are things that test for stuff and use certain loaders.
+We are using `@electron-forge/cli` to build the electron apps for different platforms. The configuration can be found in `forge.config.js`.
 
-What is `fork-ts-checker-webpack-plugin`.
+It includes a list of [makers](https://www.electronforge.io/config/makers).
 
-
-
+It also has `packageConfig`, which defines `electronZipDir`, which is the location for the cached electron binaries for different platforms. This gets used during the `nix-build` phase, as `nix` building is done in an offline environment, and requires caching ensure the required binaries used by `electron-forge` are present.
 
 ---
 
 ## Installation
 
-Note that JavaScript libraries are not packaged in Nix. Only JavaScript applications are.
 
 Building the package:
 
 ```sh
-nix-build -E '(import ./pkgs.nix).callPackage ./default.nix {}'
+nix-build -E '(import ./pkgs.nix {}).callPackage ./default.nix {}'
 ```
 
 Building the releases:
@@ -63,6 +40,16 @@ Building the releases:
 ```sh
 nix-build ./release.nix --attr application
 nix-build ./release.nix --attr docker
+# Platform specific releases:
+# LINUX
+nix-build ./release.nix --attr package.linux.x64.deb
+nix-build ./release.nix --attr package.linux.x64.rpm
+nix-build ./release.nix --attr package.linux.x64.zip
+# WINDOWS
+nix-build ./release.nix --attr package.windows.x64.exe
+nix-build ./release.nix --attr package.windows.x64.zip
+# DARWIN
+nix-build ./release.nix --attr package.darwin.x64.zip
 ```
 
 Install into Nix user profile:
@@ -74,6 +61,7 @@ nix-env -f ./release.nix --install --attr application
 Install into Docker:
 
 ```sh
+# Not Tested Currently
 docker load --input "$(nix-build ./release.nix --attr docker)"
 ```
 
@@ -81,10 +69,12 @@ docker load --input "$(nix-build ./release.nix --attr docker)"
 
 Run `nix-shell`, and once you're inside, you can use:
 
-```sh
+```
 # install (or reinstall packages from package.json)
 npm install
-# build the dist
+# build the development dist and watch for file changes
+npm run watch
+# build the production dist
 npm run build
 # run the repl (this allows you to import from ./src)
 npm run ts-node
