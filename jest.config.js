@@ -10,8 +10,10 @@ module.exports = {
     "**/?(*.)+(spec|test|unit.test).+(ts|tsx|js)"
   ],
   "transform": {
+    "^.+\\.vue$": "vue-jest",
     "^.+\\.tsx?$": "ts-jest"
   },
+  moduleFileExtensions: ['vue', 'js', 'json', 'ts'],
   setupFiles: [
     "<rootDir>/tests/setup.ts"
   ],
