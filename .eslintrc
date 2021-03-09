@@ -6,18 +6,20 @@
     "node": true,
     "jest": true
   },
-  "parser": "@typescript-eslint/parser",
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "prettier",
+    "prettier/vue",
     "prettier/@typescript-eslint"
   ],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2020
-  },
   "rules": {
     "linebreak-style": ["error", "unix"],
     "no-empty": 1,
@@ -29,6 +31,10 @@
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-inferrable-types": 0,
-    "@typescript-eslint/no-non-null-assertion": 0
+    "vue/singleline-html-element-content-newline": 0,
+    "vue/no-dupe-keys": 0,
+    "vue/require-default-prop": 0,
+    "vue/no-setup-props-destructure": 0,
+    "vue/require-valid-default-prop": 0
   }
 }

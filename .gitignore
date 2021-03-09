@@ -2,8 +2,7 @@
 /dist
 .env*
 !.env.example
-/result
-/result-*
+/result*
 
 # Logs
 logs
