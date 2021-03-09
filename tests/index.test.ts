@@ -1,8 +1,7 @@
-import { Library } from '@';
+import App from '@/renderer/App.vue';
 
-describe('index', () => {
-  test('some arbitrary test', () => {
-    const library = new Library('some param');
-    expect(library?.someParam).toEqual('some param');
+describe('App.vue', () => {
+  test('is truthy', () => {
+    expect(App).toBeTruthy();
   });
 });
