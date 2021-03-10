@@ -14,6 +14,7 @@ let
         fakeroot
       ];
       electron_zip_dir = utils.electronZipDir;
+      # DEBUG = "*" # uncomment to see electron-forge debug logs
       buildPhase = ''
         # skip check for node, npm and git
         mkdir home
@@ -21,7 +22,7 @@ let
         export HOME="$(realpath home)"
         cp ${./package.json} package.json
         cp ${./forge.config.js} forge.config.js
-        DEBUG=* electron-forge make \
+        electron-forge make \
           --arch ${arch} \
           --platform linux \
           --targets @electron-forge/maker-deb
@@ -42,6 +43,7 @@ let
           rpm
         ];
         electron_zip_dir = utils.electronZipDir;
+        # DEBUG = "*" # uncomment to see electron-forge debug logs
         buildPhase = ''
           # skip check for node, npm and git
           mkdir home
@@ -49,7 +51,7 @@ let
           export HOME="$(realpath home)"
           cp ${./package.json} package.json
           cp ${./forge.config.js} forge.config.js
-          DEBUG=* electron-forge make \
+          electron-forge make \
             --arch ${arch} \
             --platform linux \
             --targets @electron-forge/maker-rpm
@@ -74,6 +76,7 @@ let
         mono
       ];
       electron_zip_dir = utils.electronZipDir;
+      # DEBUG = "*" # uncomment to see electron-forge debug logs
       buildPhase = ''
         # wine needs a home
         mkdir home
@@ -82,7 +85,7 @@ let
         export HOME="$(realpath home)"
         cp ${./package.json} package.json
         cp ${./forge.config.js} forge.config.js
-        DEBUG=* electron-forge make \
+        electron-forge make \
           --arch ${arch} \
           --platform win32 \
           --targets @electron-forge/maker-squirrel
@@ -101,6 +104,7 @@ let
         zip
       ];
       electron_zip_dir = utils.electronZipDir;
+      # DEBUG = "*" # uncomment to see electron-forge debug logs
       buildPhase = ''
         # skip check for node, npm and git
         mkdir home
@@ -108,7 +112,7 @@ let
         export HOME="$(realpath home)"
         cp ${./package.json} package.json
         cp ${./forge.config.js} forge.config.js
-        DEBUG=* electron-forge make \
+        electron-forge make \
           --arch ${arch} \
           --platform darwin \
           --targets @electron-forge/maker-zip
