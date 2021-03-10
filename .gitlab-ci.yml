@@ -21,10 +21,9 @@ test:
   stage: check
   script:
     - >
-        echo "Hello World"
-        # nix-shell -I nixpkgs=./pkgs.nix --packages nodejs --run '
-        # npm install;
-        # npm run test;
+        nix-shell -I nixpkgs=./pkgs.nix --packages nodejs --run '
+        npm install;
+        npm run test;
         '
 
 nix-dry:
@@ -32,17 +31,12 @@ nix-dry:
   script:
     - nix-build -v -v --dry-run ./release.nix --attr application
     - nix-build -v -v --dry-run ./release.nix --attr docker
-    - >
-        nix-build -v -v --dry-run ./release.nix
-        --attr package.linux.x64.deb
-        --attr package.linux.x64.zip
-    - >
-        nix-build -v -v --dry-run ./release.nix
-        --attr package.windows.x64.exe
-        --attr package.windows.x64.zip
-    - >
-        nix-build -v -v --dry-run ./release.nix
-        --attr package.darwin.x64.zip
+    - nix-build -v -v --dry-run ./release.nix --attr package.linux.x64.deb
+    - nix-build -v -v --dry-run ./release.nix --attr package.linux.ia32.deb
+    - nix-build -v -v --dry-run ./release.nix --attr package.windows.x64.exe
+    - nix-build -v -v --dry-run ./release.nix --attr package.windows.ia32.exe
+    - nix-build -v -v --dry-run ./release.nix --attr package.darwin.x64.zip
+    - nix-build -v -v --dry-run ./release.nix --attr package.darwin.ia32.zip
 
 nix:
   stage: build
@@ -54,31 +48,16 @@ nix:
   only:
     - master
 
-linux-x64:
+packages:
   stage: release
   script:
     - >
         nix-build ./release.nix
         --attr package.linux.x64.deb
-        --attr package.linux.x64.zip
-  only:
-    - master
-
-windows-x64:
-  stage: release
-  script:
-    - >
-        nix-build ./release.nix
+        --attr package.linux.ia32.deb
         --attr package.windows.x64.exe
-        --attr package.windows.x64.zip
-  only:
-    - master
-
-darwin-x64:
-  stage: release
-  script:
-    - >
-        nix-build ./release.nix
+        --attr package.windows.ia32.exe
         --attr package.darwin.x64.zip
+        --attr package.darwin.ia32.zip
   only:
     - master

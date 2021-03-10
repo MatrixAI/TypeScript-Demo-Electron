@@ -15,10 +15,14 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
     "plugin:prettier/recommended",
     "prettier",
     "prettier/vue",
     "prettier/@typescript-eslint"
+  ],
+  "plugins": [
+    "@typescript-eslint"
   ],
   "rules": {
     "linebreak-style": ["error", "unix"],
