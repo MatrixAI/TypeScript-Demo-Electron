@@ -35,7 +35,6 @@ nix-dry:
     - >
         nix-build -v -v --dry-run ./release.nix
         --attr package.linux.x64.deb
-        --attr package.linux.x64.rpm
         --attr package.linux.x64.zip
     - >
         nix-build -v -v --dry-run ./release.nix
@@ -61,7 +60,6 @@ linux-x64:
     - >
         nix-build ./release.nix
         --attr package.linux.x64.deb
-        --attr package.linux.x64.rpm
         --attr package.linux.x64.zip
   only:
     - master
