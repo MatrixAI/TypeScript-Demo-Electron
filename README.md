@@ -92,7 +92,7 @@ The `electronRenderer` is the frontend side. This is similar to the SPA applicat
 
 ### Building Electron Application
 
-You must use umask 022 if you are using `fakeroot` to interactively build `deb` packages.
+You must use `umask 022` if you are interactively using `fakeroot` to build `deb` packages.
 
 We are using `@electron-forge/cli` to build the electron apps for different platforms. The configuration can be found in `forge.config.js`.
 
