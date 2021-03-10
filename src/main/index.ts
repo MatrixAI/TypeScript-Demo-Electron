@@ -1,5 +1,7 @@
 import path from 'path';
 import { app, BrowserWindow } from 'electron';
+import config from '@/main/config';
+import { filterByKeys } from '@/shared/utils';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -14,7 +16,9 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(config.BASE_PATH, {
+    query: filterByKeys(config, ['BASE_PATH']),
+  });
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

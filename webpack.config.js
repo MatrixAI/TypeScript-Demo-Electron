@@ -7,60 +7,57 @@ const { VueLoaderPlugin } = require('vue-loader');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const electronMain = {
-  mode: process.env.production ? 'production' : 'development',
   target: 'electron-main',
   entry: { index: './src/main/index.ts' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
+  devtool: 'source-map',
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
+    plugins: [new TsConfigPathsPlugin()]
+  },
   module: {
     rules: [
       {
-        test: /\.ts?$/,
-        loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-        ]
+        test: /\.tsx?$/,
+        loader: "ts-loader",
       },
       {
         test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
         use: [
           'file-loader'
         ]
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
       }
     ]
+  },
+  watchOptions: {
+    ignored: /node_modules/
   },
   plugins: [
     new webpack.DefinePlugin({
       __static: `"${path.resolve(__dirname, 'dist', 'static')}"`
     }),
   ],
-  resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
-    plugins: [
-      // required to load tsconfig.json for path aliases
-      new TsConfigPathsPlugin()
-    ]
-  },
 };
 
 const electronRenderer = {
-  mode: process.env.production ? 'production' : 'development',
   target: 'electron-renderer',
   entry: { renderer: './src/renderer/index.ts' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js' // resolves to "renderer.js"
+  },
+  devtool: 'source-map',
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
+    plugins: [new TsConfigPathsPlugin()]
   },
   module: {
     rules: [
@@ -69,50 +66,52 @@ const electronRenderer = {
         use: 'vue-loader'
       },
       {
-        test: /\.ts?$/,
-        loader: 'ts-loader',
+        test: /\.tsx?$/,
+        loader: "ts-loader",
         options: {
           appendTsSuffixTo: [/\.vue$/]
         }
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-        ]
+        test: /\.css$/i,
+        use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
       },
       {
         test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
         use: [
           'file-loader'
         ]
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
       }
     ]
   },
+  watchOptions: {
+    ignored: /node_modules/
+  },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/renderer/index.ejs',
+      inject: 'body',
+      xhtml: true,
+      filename: 'index.html',
+      templateParameters: {
+        title: 'TypeScript Demo Electron'
+      }
+    }),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
     new webpack.DefinePlugin({
       // configure global feature flags for vue esm-bundler
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false
     }),
-    new HtmlWebpackPlugin({
-      template: './src/renderer/index.html'
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'index.css'
-    }),
-    new VueLoaderPlugin(),
   ],
-  resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
-    plugins: [
-      // required to load tsconfig.json for path aliases
-     new TsConfigPathsPlugin()
-    ]
-  },
 };
 
 module.exports = [
