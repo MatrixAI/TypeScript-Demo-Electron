@@ -6,7 +6,7 @@ type Config = {
   BASE_PATH: string;
 };
 
-function throwError (key: string): never {
+function throwError(key: string): never {
   throw new ErrorConfig(`Invlida config ${key} variable`);
 }
 
