@@ -1,23 +1,76 @@
+// import server from './server';
+// import * as pb from '@matrixai/polykey/proto/compiled/Agent_pb';
+// import { app } from 'electron';
+// import WindowApp from './window';
+// import TrayComponent from './tray';
+
+// let mainWindow;
+// let tray;
+
+// // Initialize the server
+// server();
+
+// app.on('ready', () => {
+//   const windowApp = new WindowApp();
+//   const trayComponent = new TrayComponent();
+
+//   const newWindow = () => {
+//     /** Cleanup */
+//     mainWindow = null;
+//     mainWindow = windowApp.createWindow();
+//     trayComponent.setMainWindow(mainWindow);
+//     trayComponent.attachRecreateWindow(newWindow);
+
+//     /** If tray is existing dont recreate */
+//     if (!tray) {
+//       tray = trayComponent.createMenu();
+//     }
+
+//     return mainWindow;
+//   };
+
+//   app.on('activate', (event, hasVisibleWindows) => {
+//     if (!hasVisibleWindows) {
+//       if (mainWindow !== null) {
+//         newWindow();
+//       }
+//     }
+//   });
+
+//   newWindow();
+// });
+
+// // quit the app once closed
+// app.on('window-all-closed', async () => {
+//   if (process.platform !== 'darwin') {
+//     app.quit();
+//   }
+// });
+import server from './server';
+import * as pb from '@matrixai/polykey/proto/js/Agent_pb';
 import { app, BrowserWindow } from 'electron';
-import config from '@/main/config';
-import { filterByKeys } from '@/shared/utils';
+import path from 'path';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
+  // eslint-disable-line global-require
   app.quit();
 }
 
 const createWindow = () => {
+  server();
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(config.BASE_PATH, {
-    query: filterByKeys(config, ['BASE_PATH']),
-  });
+  mainWindow.loadFile('dist/index.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

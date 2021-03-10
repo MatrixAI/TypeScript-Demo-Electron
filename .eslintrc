@@ -6,11 +6,11 @@
     "node": true,
     "jest": true
   },
-  "parser": "vue-eslint-parser",
+  "parser": "vue-eslint/parser",
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
     "sourceType": "module",
-    "ecmaVersion": 2020
+    "ecmaVersion": 2018
   },
   "extends": [
     "eslint:recommended",

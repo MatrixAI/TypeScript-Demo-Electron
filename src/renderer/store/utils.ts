@@ -1,7 +1,4 @@
-const makeIdentifiers: any = (
-  moduleName: string,
-  identifierNames: string[],
-) => {
+const makeIdentifiers: any = (moduleName: string, identifierNames: string[]) => {
   const identifiersInternal = {};
   const identifiersExternal = {};
   for (const identifierName of identifierNames) {

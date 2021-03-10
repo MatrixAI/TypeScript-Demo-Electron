@@ -14,11 +14,13 @@
     "baseUrl": "./src",
     "paths": {
       "@": ["index"],
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@pages/*" : ["renderer/pages/*"],
+      "@organisms/*" : ["renderer/organisms/*"]
     }
   },
   "include": [
-    "./src/**/*",
-    "./types/**/*"
+    "src/**/*",
+    "types/**/*"
   ]
 }
