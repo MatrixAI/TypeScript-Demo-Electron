@@ -1,11 +1,11 @@
+
+const process = require('process');
 const path = require('path');
 const webpack = require('webpack');
-const WebpackBar = require('webpackbar');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const electronMain = {
   target: 'electron-main',
