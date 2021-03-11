@@ -1,4 +1,3 @@
-
 const process = require('process');
 const path = require('path');
 const webpack = require('webpack');
@@ -9,7 +8,7 @@ const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const electronMain = {
   target: 'electron-main',
-  entry: { index: './src/main/index.ts'},
+  entry: { index: './src/main/index.ts' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
@@ -45,19 +44,15 @@ const electronMain = {
     new webpack.DefinePlugin({
       __static: `"${path.resolve(__dirname, 'dist', 'static')}"`
     }),
-    new CopyWebpackPlugin({
-      patterns: [{ from: 'static', to: 'static' }]
-    })
   ],
 };
 
 const electronRenderer = {
   target: 'electron-renderer',
-  entry: { renderer: './src/renderer/index.ts'},
+  entry: { renderer: './src/renderer/index.ts' },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js', // resolves to "renderer.js"
-    publicPath: './'
+    filename: '[name].js' // resolves to "renderer.js"
   },
   devtool: 'source-map',
   resolve: {
@@ -119,4 +114,7 @@ const electronRenderer = {
   ],
 };
 
-module.exports = [ electronMain, electronRenderer ];
+module.exports = [
+  electronMain,
+  electronRenderer
+];
