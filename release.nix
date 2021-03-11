@@ -158,9 +158,6 @@ in
         x64 = {
           zip = buildZip "x64";
         };
-        ia32 = {
-          zip = buildZip "ia32";
-        };
       };
     };
   }
