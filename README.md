@@ -99,3 +99,5 @@ We are using `@electron-forge/cli` to build the electron apps for different plat
 It includes a list of [makers](https://www.electronforge.io/config/makers).
 
 It also has `packageConfig`, which defines `electronZipDir`, which is the location for the cached electron binaries for different platforms. This gets used during the `nix-build` phase, as `nix` building is done in an offline environment, and requires caching ensure the required binaries used by `electron-forge` are present.
+
+Note that the `electron` and `@electron-forge/cli` must be the same version between Nix specified dependencies and NPM specified dependencies. If they are not the same version, undefined behaviour may occur.
