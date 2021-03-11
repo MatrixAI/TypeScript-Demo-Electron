@@ -8,9 +8,6 @@ in
     nativeBuildInputs = [
       nodejs
       nodePackages.node2nix
-      # electron is also installed in package.json because of electron-forge
-      # electron-forge demands this
-      # but we make nix electron priority
       electron
       nodePackages."@electron-forge/cli"
       # debian builds
@@ -35,7 +32,17 @@ in
       set +o allexport
       set -v
 
-      export PATH="${electron}/bin:$(pwd)/dist/bin:$(npm bin):$PATH"
+      export PATH="$(pwd)/dist/bin:$(npm bin):$PATH"
+
+      # electron and @electron-forge/cli are both installed in package.json
+      # this ensures that in nix-shell we are using the nix packaged versions
+      export PATH="${lib.makeBinPath
+        [
+          electron
+          nodePackages."@electron-forge/cli"
+        ]
+      }:$PATH"
+
       npm install
       mkdir --parents "$(pwd)/tmp"
 
