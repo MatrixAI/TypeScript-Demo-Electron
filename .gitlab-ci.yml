@@ -36,6 +36,7 @@ nix-dry:
     - nix-build -v -v --dry-run ./release.nix --attr package.windows.x64.exe
     - nix-build -v -v --dry-run ./release.nix --attr package.windows.ia32.exe
     - nix-build -v -v --dry-run ./release.nix --attr package.darwin.x64.zip
+    - nix-build -v -v --dry-run ./release.nix --attr package.darwin.arm64.zip
 
 nix:
   stage: build
@@ -57,5 +58,6 @@ packages:
         --attr package.windows.x64.exe
         --attr package.windows.ia32.exe
         --attr package.darwin.x64.zip
+        --attr package.darwin.arm64.zip
   only:
     - master
