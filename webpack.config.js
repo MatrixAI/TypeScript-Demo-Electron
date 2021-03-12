@@ -40,11 +40,6 @@ const electronMain = {
   watchOptions: {
     ignored: /node_modules/
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      __static: `"${path.resolve(__dirname, 'dist', 'static')}"`
-    }),
-  ],
 };
 
 const electronRenderer = {
