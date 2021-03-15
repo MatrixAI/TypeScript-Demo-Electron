@@ -7,7 +7,7 @@ type Config = {
 };
 
 function throwError(key: string): never {
-  throw new ErrorConfig(`Invlida config ${key} variable`);
+  throw new ErrorConfig(`Invalid config ${key} variable`);
 }
 
 function configFromQueryParams(queryParams: URLSearchParams): Config {
