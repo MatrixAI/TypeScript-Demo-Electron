@@ -69,6 +69,18 @@ Combine `npm run watch` with `electron .`.
 
 Use manual refresh whenever the `dist` has been rebuilt.
 
+---
+**Known Development Pitfalls**:
+* In the `webpack.config.js`, `svg` files use the `file-loader`. When important `svg`s as a vue component, using `vue-svg-loader`, configure the webpack as such:
+REMOVE THE SVG FROM THE `file-loader`
+In `electronRenderer`:
+```js
+{
+  test: /\.svg$/,
+  use: ['vue-loader', 'vue-svg-loader']
+}
+```
+
 ### Using the REPL
 
 ```
