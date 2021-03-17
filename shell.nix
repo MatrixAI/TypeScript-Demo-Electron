@@ -20,6 +20,8 @@ in
       mono
       # zip builds
       zip
+      # github releases
+      gitAndTools.gh
     ];
     # prevent electron download from electron in package.json
     ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
