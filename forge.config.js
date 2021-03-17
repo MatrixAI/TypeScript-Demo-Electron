@@ -12,6 +12,9 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
     },
     {
+      name: '@electron-forge/maker-flatpak',
+    },
+    {
       name: "@electron-forge/maker-squirrel",
       config: {
         authors: "Matrix AI"

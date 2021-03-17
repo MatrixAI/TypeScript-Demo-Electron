@@ -15,6 +15,10 @@ in
       fakeroot
       # rpm builds
       rpm
+      # flatpack builds
+      flatpak
+      flatpak-builder
+      elfutils
       # exe builds
       wineWowPackages.full
       mono

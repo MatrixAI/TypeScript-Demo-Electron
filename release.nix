@@ -31,6 +31,35 @@ let
         cp out/make/deb/${arch}/*.deb $out
       '';
     };
+  buildFlatpak = arch:
+    stdenv.mkDerivation rec {
+      name = "${utils.basename}-${version}-linux-${arch}.flatpak";
+      version = utils.node2nixDev.version;
+      src = "${utils.node2nixDev}/lib/node_modules/${utils.node2nixDev.packageName}";
+      buildInputs = [
+        nodePackages."@electron-forge/cli"
+        flatpak
+        flatpak-builder
+        elfutils
+      ];
+      electron_zip_dir = utils.electronZipDir;
+      # DEBUG = "*" # uncomment to see electron-forge debug logs
+      buildPhase = ''
+        # skip check for node, npm and git
+        mkdir home
+        touch home/.skip-forge-system-check
+        export HOME="$(realpath home)"
+        cp ${./package.json} package.json
+        cp ${./forge.config.js} forge.config.js
+        electron-forge make \
+          --arch ${arch} \
+          --platform linux \
+          --targets @electron-forge/maker-flatpak
+      '';
+      installPhase = ''
+        cp out/make/deb/${arch}/*.deb $out
+      '';
+    };
   buildRpm = arch:
     let
       builtRpm = vmTools.runInLinuxVM (stdenv.mkDerivation rec {
