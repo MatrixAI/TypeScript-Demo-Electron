@@ -25,8 +25,8 @@ export default defineComponent({
   props: {
     config: {
       type: Object as PropType<Config>,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     console.log('Root Config', props.config);
@@ -38,7 +38,7 @@ export default defineComponent({
       count,
       increment,
     };
-  }
+  },
 });
 </script>
 

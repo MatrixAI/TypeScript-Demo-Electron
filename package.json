@@ -22,8 +22,8 @@
     "build": "webpack-cli --mode='production'",
     "ts-node": "ts-node -r tsconfig-paths/register",
     "test": "jest",
-    "lint": "eslint '{src,tests}/**/*.{js,ts}'",
-    "lintfix": "eslint '{src,tests}/**/*.{js,ts}' --fix"
+    "lint": "eslint '{src,tests}/**/*.{js,ts,vue}'",
+    "lintfix": "eslint '{src,tests}/**/*.{js,ts,vue}' --fix"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.10",
