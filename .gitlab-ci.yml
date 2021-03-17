@@ -43,6 +43,8 @@ nix:
   script:
     - >
         nix-build ./release.nix
+        --max-jobs $(nproc)
+        --cores $(nproc)
         --attr application
         --attr docker
   only:
@@ -52,12 +54,23 @@ packages:
   stage: release
   script:
     - >
-        nix-build ./release.nix
-        --attr package.linux.x64.deb
-        --attr package.linux.ia32.deb
-        --attr package.windows.x64.exe
-        --attr package.windows.ia32.exe
-        --attr package.darwin.x64.zip
-        --attr package.darwin.arm64.zip
+        nix-shell -I nixpkgs=./pkgs.nix --packages git gitAndTools.gh --run '
+        builds="$(nix-build \
+          --max-jobs $(nproc) --cores $(nproc) \
+          ./release.nix \
+          --attr package.linux.x64.deb \
+          --attr package.linux.ia32.deb \
+          --attr package.windows.x64.exe \
+          --attr package.windows.ia32.exe \
+          --attr package.darwin.x64.zip \
+          --attr package.darwin.arm64.zip)";
+        commit="$(git rev-parse --short HEAD)";
+        gh release \
+          create "$commit" $builds \
+          --title "Build-$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+          --prerelease \
+          --notes "" \
+          --repo MatrixAI/TypeScript-Demo-Electron;
+        '
   only:
     - master
