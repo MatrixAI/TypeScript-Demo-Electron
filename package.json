@@ -26,6 +26,7 @@
     "lintfix": "eslint '{src,tests}/**/*.{js,ts}' --fix"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.13.10",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
@@ -36,6 +37,8 @@
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "@vue/compiler-sfc": "^3.0.5",
+    "@vue/test-utils": "^2.0.0-beta.14",
+    "babel-jest": "^26.6.3",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
     "ejs-webpack-loader": "^2.2.2",
