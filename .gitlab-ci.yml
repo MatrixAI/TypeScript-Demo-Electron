@@ -10,6 +10,7 @@ image: registry.gitlab.com/matrixai/engineering/maintenance/gitlab-runner
 
 lint:
   stage: check
+  interruptible: true
   script:
     - >
         nix-shell -I nixpkgs=./pkgs.nix --packages nodejs --run '
@@ -19,6 +20,7 @@ lint:
 
 test:
   stage: check
+    interruptible: true
   script:
     - >
         nix-shell -I nixpkgs=./pkgs.nix --packages nodejs --run '
@@ -28,6 +30,7 @@ test:
 
 nix-dry:
   stage: check
+    interruptible: true
   script:
     - nix-build -v -v --dry-run ./release.nix --attr application
     - nix-build -v -v --dry-run ./release.nix --attr docker
@@ -40,6 +43,7 @@ nix-dry:
 
 nix:
   stage: build
+  interruptible: true
   script:
     - >
         nix-build ./release.nix
@@ -52,6 +56,7 @@ nix:
 
 packages:
   stage: release
+  interruptible: true
   script:
     - >
         nix-shell -I nixpkgs=./pkgs.nix --packages git gitAndTools.gh --run '
