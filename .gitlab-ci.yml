@@ -20,7 +20,7 @@ lint:
 
 test:
   stage: check
-    interruptible: true
+  interruptible: true
   script:
     - >
         nix-shell -I nixpkgs=./pkgs.nix --packages nodejs --run '
@@ -30,7 +30,7 @@ test:
 
 nix-dry:
   stage: check
-    interruptible: true
+  interruptible: true
   script:
     - nix-build -v -v --dry-run ./release.nix --attr application
     - nix-build -v -v --dry-run ./release.nix --attr docker
