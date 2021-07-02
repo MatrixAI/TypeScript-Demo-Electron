@@ -96,7 +96,7 @@ let
     };
   buildZip = arch:
     stdenv.mkDerivation rec {
-      name = "${utils.basename}-${version}-darwin-${arch}.zip";
+      name = "${utils.basename}-${version}-macos-${arch}.zip";
       version = utils.node2nixDev.version;
       src = "${utils.node2nixDev}/lib/node_modules/${utils.node2nixDev.packageName}";
       buildInputs = [
@@ -154,7 +154,7 @@ in
           exe = buildExe "ia32";
         };
       };
-      darwin = {
+      macos = {
         x64 = {
           zip = buildZip "x64";
         };
