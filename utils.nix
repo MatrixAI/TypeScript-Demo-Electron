@@ -50,7 +50,6 @@ rec {
       npm install
     '';
   });
-  electronVersion = "12.0.9";
   electronBuilds = {
     "12.0.9" = {
       "linux-x64" = fetchurl {
@@ -81,7 +80,7 @@ rec {
   };
   electronZipDir =
     let
-      electronBuild = electronBuilds."${electronVersion}";
+      electronBuild = electronBuilds."12.0.9";
     in
       linkFarm "electron-zip-dir"
         [

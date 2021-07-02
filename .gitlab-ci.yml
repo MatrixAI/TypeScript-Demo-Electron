@@ -38,8 +38,8 @@ nix-dry:
     - nix-build -v -v --dry-run ./release.nix --attr package.linux.ia32.deb
     - nix-build -v -v --dry-run ./release.nix --attr package.windows.x64.exe
     - nix-build -v -v --dry-run ./release.nix --attr package.windows.ia32.exe
-    - nix-build -v -v --dry-run ./release.nix --attr package.darwin.x64.zip
-    - nix-build -v -v --dry-run ./release.nix --attr package.darwin.arm64.zip
+    - nix-build -v -v --dry-run ./release.nix --attr package.macos.x64.zip
+    - nix-build -v -v --dry-run ./release.nix --attr package.macos.arm64.zip
 
 nix:
   stage: build
@@ -67,8 +67,8 @@ packages:
           --attr package.linux.ia32.deb \
           --attr package.windows.x64.exe \
           --attr package.windows.ia32.exe \
-          --attr package.darwin.x64.zip \
-          --attr package.darwin.arm64.zip)";
+          --attr package.macos.x64.zip \
+          --attr package.macos.arm64.zip)";
         commit="$(git rev-parse --short HEAD)";
         gh release \
           create "$commit" $builds \
