@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { createApp } from 'vue';
 import configFromQueryParams from '@/renderer/config';
 import createRouter from '@/renderer/router';

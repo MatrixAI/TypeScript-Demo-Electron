@@ -10,6 +10,7 @@ in
       nodePackages.node2nix
       electron
       nodePackages."@electron-forge/cli"
+      git
       # debian builds
       dpkg
       fakeroot
